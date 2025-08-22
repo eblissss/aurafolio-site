@@ -1,0 +1,49 @@
+---
+import "../styles/theme.css";
+import "../styles/utilities.css";
+import "../styles/global.css";
+import "../styles/buttons.css";
+
+import site from "../config/site";
+import Header from "../components/Header.astro";
+import Hero from "../components/Hero.astro";
+import FeatureGrid from "../components/FeatureGrid.astro";
+import Download from "../components/Download.astro";
+import WhatsNew from "../components/WhatsNew.astro";
+import FAQ from "../components/FAQ.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{site.title}</title>
+    <meta name="description" content={site.description} />
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content={site.themeColor} />
+  </head>
+  <body>
+    <div class="container">
+      <Header />
+      <Hero />
+      <FeatureGrid />
+      <Download />
+      <WhatsNew />
+      <FAQ />
+      <Footer />
+    </div>
+
+    <script type="module">
+      import { initMotion } from "../scripts/motion-init.mjs";
+
+      // initialize motion on DOM ready
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", () => initMotion());
+      } else {
+        initMotion();
+      }
+    </script>
+  </body>
+</html>

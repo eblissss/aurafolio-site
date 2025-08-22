@@ -1,0 +1,73 @@
+---
+import {
+  BookOpen as BookOpenIcon,
+  ChevronDown as ChevronDownIcon,
+} from "@lucide/astro";
+import site from "../config/site";
+
+const faqs = [
+  {
+    q: "Does it work offline?",
+    a: "Yes! AuraFolio runs completely offline after installation. No internet connection required for viewing your PDF sheet music.",
+  },
+  {
+    q: "Is it free to use?",
+    a: "Yes, AuraFolio is completely free. No subscriptions, no ads, no tracking.",
+  },
+  {
+    q: "Which file formats are supported?",
+    a: "Currently, AuraFolio only supports PDF files. In the meantime, there are numerous PDF converters available online.",
+  },
+  {
+    q: "How do I navigate through pages?",
+    a: "Use keyboard shortcuts (arrow keys), touch and drag on the sheet, or tap the sides of the screen for smooth, lag-free page turning.",
+  },
+  {
+    q: "Why did you make AuraFolio?",
+    a: "I wanted a minimal and efficient way to manage and view my sheet music, and there wasn't a quality option I liked. It's free for everyone since it was a hobby project that cost me nothing to create or host.",
+  },
+];
+---
+
+<section class="section faq-section" id="faq">
+  <div class="container">
+    <div class="text-center mb-8">
+      <h2 class="faq-title">Frequently Asked Questions</h2>
+    </div>
+
+    <div class="faq-container">
+      <div class="faq-grid">
+        {
+          faqs.map((f, index) => (
+            <details class="faq-item">
+              <summary class="faq-question">
+                <span class="question-text">{f.q}</span>
+                <div class="question-icon">
+                  <ChevronDownIcon size={20} />
+                </div>
+              </summary>
+              <div class="faq-answer">
+                <hr />
+                <p>{f.a}</p>
+              </div>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+
+    <div class="faq-cta">
+      <div class="cta-card">
+        <div class="cta-content cta-row">
+          <h5 class="cta-title">Have a Question?</h5>
+          <h5 class="cta-title">Found a Bug?</h5>
+          <h5 class="cta-title">Want a Feature?</h5>
+        </div>
+        <a href={site.issuesUrl} class="cta-button">
+          <BookOpenIcon size={18} />
+          <span>Create GitHub Issue</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

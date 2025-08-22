@@ -1,0 +1,37 @@
+{
+  "version": "1.0.0",
+  "released": "2025-08-19T07:00:00Z",
+  "assets": {
+    "Windows (x64)": {
+      "size_mb": 5.0,
+      "sha256": "a1b2c3d4e5f6789012345678901234567890abcdef1234567890abcdef123456",
+      "url": "https://github.com/OWNER/SITE_REPO/releases/download/v1.0.0/AuraFolio-Setup-v1.0.0-windows-x64.exe",
+      "filename": "AuraFolio-Setup-v1.0.0-windows-x64.exe"
+    },
+    "macOS (Apple Silicon)": {
+      "size_mb": 5.0,
+      "sha256": "b2c3d4e5f6789012345678901234567890abcdef1234567890abcdef1234567",
+      "url": "https://github.com/OWNER/SITE_REPO/releases/download/v1.0.0/AuraFolio-v1.0.0-macos-arm64.dmg",
+      "filename": "AuraFolio-v1.0.0-macos-arm64.dmg"
+    },
+    "Linux (x64)": {
+      "size_mb": 5.0,
+      "sha256": "c3d4e5f6789012345678901234567890abcdef1234567890abcdef12345678",
+      "url": "https://github.com/OWNER/SITE_REPO/releases/download/v1.0.0/AuraFolio-v1.0.0-linux-x64.AppImage",
+      "filename": "AuraFolio-v1.0.0-linux-x64.AppImage"
+    }
+  },
+  "notes": "## What's New in v1.0.0\n\n### ✨ New Features\n- **Performance Mode**: Distraction-free full-screen viewing for performances\n- **Bluetooth Pedal Support**: Compatible with popular page-turn pedals\n- **Smart Annotations**: Highlight, circle, and add text annotations to your scores\n- **Setlist Management**: Organize your music for gigs and rehearsals\n\n### 🎵 Music Format Support\n- High-quality PDF rendering with smooth zooming\n- MusicXML support for editable scores\n- Optimized for both desktop and tablet use\n\n### ⚡ Performance Improvements\n- Lightning-fast file opening (under 1 second for most scores)\n- Lag-free page turning with hardware acceleration\n- Reduced memory usage for large collections\n\n### 🔧 Technical\n- Built with modern web technologies for cross-platform compatibility\n- Offline-first architecture - works without internet\n- Automatic backup of annotations and settings\n\nThis is the initial release of AuraFolio - we're excited to help musicians focus on what matters most: the music! 🎼",
+  "prev_notes": [
+    {
+      "version": "0.9.0-beta",
+      "released": "2025-08-18T07:00:00Z",
+      "notes": "## Beta Release v0.9.0\n\n### 🧪 Beta Features\n- Initial PDF viewer implementation\n- Basic annotation tools\n- Keyboard shortcuts for page navigation\n\n### 🐛 Known Issues\n- Linux build not yet available\n- Performance optimization ongoing\n- Some edge cases with complex scores\n\nThank you to our beta testers for their valuable feedback!"
+    },
+    {
+      "version": "0.8.0-alpha",
+      "released": "2025-08-17T07:00:00Z",
+      "notes": "## Alpha Release v0.8.0\n\n### 🧪 Alpha Features\n- Basic PDF rendering\n- Initial support for annotations\n\n### 🐛 Known Issues\n- Limited file format support\n- Performance issues on large files\n\nThank you to our alpha testers for their feedback!"
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+node_modules
+dist
+.tmp
+*.log
+src/data/releases.json
+.astro

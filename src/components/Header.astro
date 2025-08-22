@@ -1,0 +1,22 @@
+---
+import { Image } from "astro:assets";
+import Logo from "../images/AURAFOLIO_cropped.png";
+import site from "../config/site";
+
+const nav = site.nav;
+---
+
+<header class="header-nav" aria-label="Main">
+  <div class="brand">
+    <Image src={Logo} alt="AuraFolio logo" height={96} />
+  </div>
+  <nav class="nav-actions" aria-label="Actions">
+    {
+      nav.map((n) => (
+        <a class="btn ghost" href={n.href}>
+          {n.label}
+        </a>
+      ))
+    }
+  </nav>
+</header>

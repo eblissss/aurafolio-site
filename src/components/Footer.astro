@@ -1,0 +1,14 @@
+---
+import site from "../config/site";
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div>© {year} {site.ownerName}</div>
+  <div class="pills" aria-label="Supported platforms">
+    {site.supportedPlatforms.map((p) => <span class="pill">{p}</span>)}
+  </div>
+  <div>
+    <a href="/terms">Terms</a> · <a href="/privacy">Privacy</a>
+  </div>
+</footer>

@@ -1,0 +1,125 @@
+/* ==================== BUTTON STYLES ==================== */
+
+/* Remove default button styles */
+button {
+    background: none;
+    border: none;
+    font: inherit;
+    cursor: pointer;
+    transition: all var(--transition-base);
+}
+
+/* ==================== MAIN BUTTON SYSTEM ==================== */
+
+/* Buttons: modern, accessible, and consistent system based on header btn-ghost theme */
+.btn {
+    --btn-gap: 10px;
+    --btn-padding-y: 12px;
+    --btn-padding-x: 16px;
+    --btn-radius: 12px;
+    --btn-font-size: var(--font-size-base);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--btn-gap);
+    padding: var(--btn-padding-y) var(--btn-padding-x);
+    font-size: var(--btn-font-size);
+    font-weight: var(--font-weight-medium);
+    line-height: 1;
+    text-decoration: none;
+    border: 1px solid rgba(43, 120, 255, 0.8);
+    border-radius: var(--btn-radius);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap;
+    -webkit-tap-highlight-color: transparent;
+    /* Default (primary) */
+    background: linear-gradient(135deg, var(--accent-primary), var(--primary-700));
+    color: var(--text-inverse);
+}
+
+/* State styles */
+.btn:hover,
+.btn:focus-visible {
+    transform: translateY(-2px) scale(1.05);
+    background: linear-gradient(135deg, var(--accent-hover), var(--primary-800));
+    border-color: rgba(43, 120, 255, 1);
+    box-shadow: 0 8px 25px rgba(43, 120, 255, 0.15);
+    color: var(--text-inverse);
+    text-decoration: none;
+}
+
+.btn:active {
+    transform: translateY(0) scale(1.02);
+    transition: all 0.1s ease;
+}
+
+.btn:focus {
+    outline: none;
+}
+
+.btn:focus-visible {
+    box-shadow: 0 8px 25px rgba(43, 120, 255, 0.15), 0 0 0 4px rgba(43, 120, 255, 0.12);
+}
+
+/* ==================== BUTTON VARIANTS ==================== */
+
+/* Outline variant */
+.btn.outline {
+    background: transparent;
+    color: var(--accent-primary);
+    border: 1px solid rgba(43, 120, 255, 0.3);
+}
+
+.btn.outline:hover,
+.btn.outline:focus-visible {
+    transform: translateY(-2px) scale(1.05);
+    background: rgba(43, 120, 255, 0.05);
+    border-color: rgba(43, 120, 255, 0.8);
+    color: var(--accent-hover);
+    box-shadow: 0 8px 25px rgba(43, 120, 255, 0.15);
+}
+
+.btn.outline:active {
+    transform: translateY(0) scale(1.02);
+    transition: all 0.1s ease;
+}
+
+/* Ghost variant - matches header-nav btn-ghost exactly */
+.btn.ghost {
+    background: transparent;
+    color: #0c1222;
+    border: 1px solid rgba(15, 25, 40, 0.08);
+}
+
+.btn.ghost:hover,
+.btn.ghost:focus-visible {
+    transform: translateY(-2px) scale(1.05);
+    background: rgba(255, 255, 255, 0.8);
+    border-color: rgba(43, 120, 255, 0.2);
+    color: #0c1222;
+    box-shadow: 0 8px 25px rgba(43, 120, 255, 0.15);
+}
+
+.btn.ghost:active {
+    transform: translateY(0) scale(1.02);
+    transition: all 0.1s ease;
+}
+
+/* ==================== BUTTON SIZES ==================== */
+
+.btn.sm {
+    --btn-padding-y: 8px;
+    --btn-padding-x: 12px;
+    --btn-font-size: var(--font-size-sm);
+    --btn-radius: 10px;
+}
+
+.btn.lg {
+    --btn-padding-y: 16px;
+    --btn-padding-x: 24px;
+    --btn-font-size: var(--font-size-lg);
+    --btn-radius: 16px;
+}

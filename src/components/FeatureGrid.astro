@@ -1,0 +1,73 @@
+---
+import {
+  FileText,
+  FolderOpen,
+  ArrowLeftRight,
+  ListChecks,
+  BookOpenText,
+  CloudOff,
+} from "@lucide/astro";
+
+const features = [
+  {
+    title: "Crystal Clear PDFs",
+    desc: "Lightning fast rendering of PDF sheet music with perfect clarity.",
+    icon: FileText,
+  },
+  {
+    title: "Your Collection",
+    desc: "Easily search, preview, and organize your PDF files.",
+    icon: FolderOpen,
+  },
+  {
+    title: "Easy Navigation",
+    desc: "Navigate with arrow keys or touch for intuitive page turning.",
+    icon: ArrowLeftRight,
+  },
+  {
+    title: "Setlist Organization",
+    desc: "Create and manage custom setlists for practice sessions.",
+    icon: ListChecks,
+  },
+  {
+    title: "Connected Sheets",
+    desc: "Seamlessly view multiple sheets at once for more continuous play.",
+    icon: BookOpenText,
+  },
+  {
+    title: "Offline Ready",
+    desc: "Works completely offline. No internet required after installation.",
+    icon: CloudOff,
+  },
+];
+---
+
+<section class="section" id="features">
+  <div class="container">
+    <div class="text-center mb-12">
+      <h2>A minimal PDF viewer and organizer</h2>
+      <p class="text-muted mt-3 max-w-2xl mx-auto">
+        AuraFolio focuses on what matters most: displaying your PDF sheets
+        efficiently.
+      </p>
+    </div>
+
+    <div class="grid grid-3">
+      {
+        features.map((f, index) => (
+          <div class="card">
+            <div class="flex items-start gap-4">
+              <div class="icon-wrap">
+                <f.icon size={32} class="text-accent" />
+              </div>
+              <div class="flex-1">
+                <h3 class="font-semibold text-lg mb-2">{f.title}</h3>
+                <p class="text-muted leading-relaxed">{f.desc}</p>
+              </div>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

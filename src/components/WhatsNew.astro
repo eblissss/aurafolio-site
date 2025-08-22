@@ -1,0 +1,78 @@
+---
+import type { SoftwareRelease, PreviousNote } from "../types/types";
+import { marked } from "marked";
+import releaseJson from "../../releases.json";
+import { BookOpen as BookOpenIcon } from "@lucide/astro";
+import site from "../config/site";
+const data = releaseJson as SoftwareRelease;
+
+// Build combined entries list with current release first
+const entries: PreviousNote[] = [
+  { version: data.version, released: data.released, notes: data.notes },
+  ...data.prev_notes,
+];
+
+// Helper to build machine + human friendly date; keep format concise & consistent site-wide
+function formatDate(dateStr: string) {
+  return new Date(dateStr).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
+}
+---
+
+<section class="section" id="whats-new">
+  <div class="container">
+    <div class="text-center mb-8">
+      <h2>What's New</h2>
+      <p class="download-subtitle">
+        Latest updates and improvements to AuraFolio
+      </p>
+    </div>
+
+    <div class="max-w-4xl mx-auto">
+      <div class="scroll-panel whats-new-panel">
+        {
+          entries.map((rel, index) => {
+            const id = `v-${rel.version}`;
+            return (
+              <article id={id} class="wn-entry">
+                <div class="wn-entry-inner">
+                  <div class="wn-meta-col">
+                    {index === 0 && <span class="wn-badge latest">Latest</span>}
+                    <span class="wn-version-number">v{rel.version}</span>
+                    <time
+                      datetime={
+                        new Date(rel.released).toISOString().split("T")[0]
+                      }
+                      class="wn-date"
+                    >
+                      {formatDate(rel.released)}
+                    </time>
+                  </div>
+                  <div class="wn-content-col">
+                    <div
+                      class="prose wn-notes"
+                      set:html={marked(rel.notes || "")}
+                    />
+                  </div>
+                </div>
+                {index < entries.length - 1 && <hr class="wn-separator" />}
+              </article>
+            );
+          })
+        }
+      </div>
+    </div>
+
+    <div class="text-center mt-8">
+      <div class="flex flex-wrap gap-4 justify-center items-center">
+        <a href={`${site.repoUrl}/releases`} class="btn outline">
+          <BookOpenIcon size={16} class="mr-2" />
+          View All Releases
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

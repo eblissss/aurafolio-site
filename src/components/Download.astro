@@ -1,0 +1,152 @@
+---
+import type { SoftwareRelease } from "../types/types";
+import {
+  Download as DownloadIcon,
+  Clipboard as ClipboardIcon,
+  Check as CheckIcon,
+} from "@lucide/astro";
+import logoSquare from "../images/aurafolio_square_crop.png";
+
+import releaseJson from "../../releases.json";
+const data = releaseJson as SoftwareRelease;
+const assets = data.assets || {};
+
+function fmtMB(n: any) {
+  const mb = Number(n ?? 0);
+  return `${mb.toFixed(1)} MB`;
+}
+
+function getSystemRequirements(platform: string) {
+  if (platform.includes("Windows")) return "Windows 10/11 (64-bit)";
+  if (platform.includes("macOS")) return "macOS 10.14+ (Mojave or later)";
+  if (platform.includes("Linux")) return "Ubuntu 18.04+ or equivalent";
+  return "See system requirements";
+}
+---
+
+<section class="section" id="download">
+  <div class="container">
+    <!-- Enhanced header with better visual hierarchy -->
+    <div class="text-center mb-16">
+      <h2 class="download-title">Download AuraFolio</h2>
+      <p class="download-subtitle">
+        Choose your platform and start organizing your sheet music in seconds
+      </p>
+
+      <div class="release-info">
+        <div class="version-display">
+          <span class="version-number">{data.version}</span>
+          <span class="version-label">Latest Release</span>
+        </div>
+        <p class="release-date">
+          Released {
+            new Date(data.released).toLocaleDateString("en-US", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })
+          }
+        </p>
+      </div>
+    </div>
+
+    <!-- Enhanced download grid with better spacing -->
+    <div class="download-grid">
+      {
+        Object.entries(assets).map(([platform, asset], index) => (
+          <div
+            class="download-card"
+            data-platform={platform.toLowerCase().replace(/[^a-z0-9]/g, "-")}
+          >
+            <div class="card-header">
+              <div class="logo-wrap" aria-hidden="true">
+                <img
+                  src={logoSquare.src}
+                  alt="AuraFolio logo"
+                  class="platform-logo"
+                  height={48}
+                />
+              </div>
+
+              <div class="platform-info">
+                <div class="platform-details">
+                  <h3 class="platform-name">{platform}</h3>
+                  <div class="platform-meta">
+                    <span class="file-size">{fmtMB(asset.size_mb)}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="download-section">
+              <a href={asset.url} class="btn download-btn">
+                <DownloadIcon size={24} />
+                <span>Download for {platform.split(" ")[0]}</span>
+              </a>
+
+              <div class="system-req">
+                <div class="req-header">
+                  <span class="req-label">System Requirements</span>
+                </div>
+                <span class="req-text">{getSystemRequirements(platform)}</span>
+              </div>
+            </div>
+
+            <div class="security-section">
+              <div class="checksum-section">
+                <label class="checksum-label">SHA256 Checksum:</label>
+                <div class="checksum-row">
+                  <div class="checksum-display">
+                    <code class="checksum-value">{asset.sha256}</code>
+                    <button
+                      class="copy-checksum-btn"
+                      data-clipboard={asset.sha256}
+                      title="Copy checksum to clipboard"
+                    >
+                      <ClipboardIcon size={16} class="copy-icon" />
+                      <CheckIcon size={16} class="check-icon hidden" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+    <p class="text-muted mt-6 mx-auto text-center">
+      By downloading, you agree to the <a href="/terms" class="link"
+        >Terms and Conditions</a
+      > and the <a href="/privacy" class="link">Privacy Policy</a>.
+    </p>
+  </div>
+</section>
+
+<script>
+  // Simple copy to clipboard functionality
+  const copyBtns = document.querySelectorAll(".copy-checksum-btn");
+  copyBtns.forEach((btn) => {
+    btn.addEventListener("click", async (e) => {
+      e.preventDefault();
+      const text = btn.getAttribute("data-clipboard") || "";
+      const copyIcon = btn.querySelector(".copy-icon");
+      const checkIcon = btn.querySelector(".check-icon");
+
+      try {
+        await navigator.clipboard.writeText(text);
+        // Show check mark
+        copyIcon?.classList.add("hidden");
+        checkIcon?.classList.remove("hidden");
+        checkIcon?.classList.add("success");
+
+        setTimeout(() => {
+          copyIcon?.classList.remove("hidden");
+          checkIcon?.classList.add("hidden");
+          checkIcon?.classList.remove("success");
+        }, 1500);
+      } catch (e) {
+        console.warn("Clipboard API failed");
+      }
+    });
+  });
+</script>

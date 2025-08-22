@@ -1,0 +1,56 @@
+---
+import { Download as DownloadIcon } from "@lucide/astro";
+---
+
+<section class="hero">
+  <div class="container">
+    <div class="grid grid-2 items-center">
+      <div>
+        <h1 class="leading-tight">Sheet music,</h1>
+        <h2 class="leading-tight">intuitive and organized.</h2>
+        <p class="subhead">
+          View, organize, and perform your PDF sheet music. Featuring
+          lightning-fast page turns, an intuitive display, and completely
+          offline functionality (with zero data collection).
+        </p>
+        <div class="flex flex-wrap mt-8 mb-8">
+          <a href="#download" class="btn lg">
+            <DownloadIcon size={32} class="mr-2" />
+            Download AuraFolio
+          </a>
+        </div>
+        <div class="flex items-center gap-6 mt-6 text-sm text-muted">
+          <div class="flex items-center gap-2">
+            <span class="dot" aria-hidden="true"></span>
+            Intuitive PDF viewing
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="dot" aria-hidden="true"></span>
+            Organize your sheets
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="dot" aria-hidden="true"></span>
+            Completely offline
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="hero-card" aria-label="Product preview">
+          <picture>
+            <source
+              srcset="https://picsum.photos/600/400"
+              media="(prefers-color-scheme: dark)"
+            />
+            <img
+              src="https://picsum.photos/600/400"
+              alt="The AuraFolio application displaying a PDF sheet music score"
+              loading="eager"
+              width="600"
+              height="400"
+            />
+          </picture>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
