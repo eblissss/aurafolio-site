@@ -24,9 +24,9 @@ const site: SiteConfig = {
     repoUrl: repo,
     issuesUrl: `${repo}/issues`,
     nav: [
-        { href: "#features", label: "Features" },
-        { href: "#download", label: "Download" },
-        { href: "#whats-new", label: "Changelog" },
+        { href: "/#features", label: "Features" },
+        { href: "/#download", label: "Download" },
+        { href: "/#whats-new", label: "Changelog" },
     ],
     // For the Footer
     supportedPlatforms: ["Windows", "macOS", "Linux"],

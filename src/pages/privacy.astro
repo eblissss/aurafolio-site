@@ -1,7 +1,15 @@
 ---
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
 import "../styles/theme.css";
 import "../styles/utilities.css";
 import "../styles/global.css";
+import "../styles/buttons.css";
+import { readFileSync } from "fs";
+import { marked } from "marked";
+
+const md = readFileSync(new URL("../../privacy.md", import.meta.url), "utf-8");
+const html = marked.parse(md);
 ---
 
 <html lang="en">
@@ -10,11 +18,16 @@ import "../styles/global.css";
     <title>Privacy — AuraFolio</title>
   </head>
   <body>
-    <main class="container" style="padding:40px 0;">
-      <h1>Privacy</h1>
-      <p class="small" style="margin-top:10px;">
-        We do not collect any data through the AuraFolio app.
-      </p>
+    <main class="container">
+      <Header />
+
+      <main class="container">
+        <section class="card mt-6 mb-8 p-8">
+          <div class="prose max-w-4xl mx-auto" set:html={html} />
+        </section>
+      </main>
+
+      <Footer />
     </main>
   </body>
 </html>

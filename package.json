@@ -10,7 +10,6 @@
     "preview": "astro preview"
   },
   "dependencies": {
-    "@astrojs/mdx": "^4.3.4",
     "@lucide/astro": "^0.540.0",
     "astro": "^5.13.2",
     "marked": "^16.2.0",
