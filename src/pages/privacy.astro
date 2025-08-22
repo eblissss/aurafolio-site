@@ -1,6 +1,7 @@
 ---
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import site from "../config/site";
 import "../styles/theme.css";
 import "../styles/utilities.css";
 import "../styles/global.css";
@@ -15,11 +16,14 @@ const html = marked.parse(md);
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Privacy — AuraFolio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Privacy Policy — {site.title}</title>
+    <meta name="description" content={site.description} />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
     <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content={site.themeColor} />
   </head>
   <body>
     <main class="container">
