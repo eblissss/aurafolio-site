@@ -1,4 +1,6 @@
 ---
+import { Image } from "astro:assets";
+
 const topShots = [
     {
         src: "https://picsum.photos/800/450",
@@ -41,15 +43,13 @@ const bottomShots = [
                 {
                     topShots.map((s) => (
                         <div class="hero-card screenshot-card">
-                            <picture>
-                                <img
-                                    src={s.src}
-                                    alt={s.alt}
-                                    loading="lazy"
-                                    width={800}
-                                    height={450}
-                                />
-                            </picture>
+                            <Image
+                                src={s.src}
+                                alt={s.alt}
+                                loading="lazy"
+                                width={800}
+                                height={450}
+                            />
                         </div>
                     ))
                 }
@@ -60,15 +60,13 @@ const bottomShots = [
                 {
                     bottomShots.map((s) => (
                         <div class="hero-card screenshot-card">
-                            <picture>
-                                <img
-                                    src={s.src}
-                                    alt={s.alt}
-                                    loading="lazy"
-                                    width={400}
-                                    height={600}
-                                />
-                            </picture>
+                            <Image
+                                src={s.src}
+                                alt={s.alt}
+                                loading="lazy"
+                                width={400}
+                                height={600}
+                            />
                         </div>
                     ))
                 }

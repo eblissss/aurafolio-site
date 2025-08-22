@@ -1,5 +1,6 @@
 ---
 import { Download as DownloadIcon } from "@lucide/astro";
+import { Image } from "astro:assets";
 ---
 
 <section class="hero">
@@ -36,19 +37,13 @@ import { Download as DownloadIcon } from "@lucide/astro";
       </div>
       <div>
         <div class="hero-card" aria-label="Product preview">
-          <picture>
-            <source
-              srcset="https://picsum.photos/600/400"
-              media="(prefers-color-scheme: dark)"
-            />
-            <img
-              src="https://picsum.photos/600/400"
-              alt="The AuraFolio application displaying a PDF sheet music score"
-              loading="eager"
-              width="600"
-              height="400"
-            />
-          </picture>
+          <Image
+            src="https://picsum.photos/600/400"
+            alt="The AuraFolio application displaying a PDF sheet music score"
+            loading="eager"
+            width="600"
+            height="400"
+          />
         </div>
       </div>
     </div>

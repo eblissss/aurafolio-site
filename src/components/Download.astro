@@ -8,6 +8,7 @@ import {
 import logoSquare from "../images/aurafolio_square_crop.png";
 
 import releaseJson from "../../releases.json";
+import { Image } from "astro:assets";
 const data = releaseJson as SoftwareRelease;
 const assets = data.assets || {};
 
@@ -60,11 +61,10 @@ function getSystemRequirements(platform: string) {
           >
             <div class="card-header">
               <div class="logo-wrap" aria-hidden="true">
-                <img
-                  src={logoSquare.src}
+                <Image
+                  src={logoSquare}
                   alt="AuraFolio logo"
                   class="platform-logo"
-                  height={48}
                 />
               </div>
 
