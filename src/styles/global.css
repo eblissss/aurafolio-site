@@ -402,13 +402,13 @@ pre.code {
 
 /* Sections */
 .section {
-  padding: var(--space-20) 0;
+  padding: var(--space-16) 0;
   position: relative;
 }
 
 @media (max-width: 768px) {
   .section {
-    padding: var(--space-16) 0;
+    padding: var(--space-12) 0;
   }
 }
 
@@ -778,7 +778,7 @@ footer {
 }
 
 .faq-cta {
-  margin-top: 128px;
+  margin-top: 96px;
   display: flex;
   justify-content: center;
 }
@@ -1615,5 +1615,57 @@ footer {
     flex-direction: row;
     justify-content: center;
     flex-wrap: wrap;
+  }
+}
+
+/* ==================== SCREENSHOTS SECTION STYLES ==================== */
+.screenshots-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.screenshots-row-top {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-6);
+}
+
+.screenshots-row-bottom {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+}
+
+.screenshot-card {
+  overflow: hidden;
+}
+
+.screenshot-card img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+/* Responsive design for screenshots */
+@media (max-width: 768px) {
+  .screenshots-row-top {
+    grid-template-columns: 1fr;
+  }
+
+  .screenshots-row-bottom {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 1024px) and (min-width: 769px) {
+  .screenshots-row-bottom {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .screenshots-row-bottom .screenshot-card:last-child {
+    grid-column: 1 / -1;
+    max-width: 50%;
+    margin: 0 auto;
   }
 }

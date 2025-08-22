@@ -1,0 +1,78 @@
+---
+const topShots = [
+    {
+        src: "https://picsum.photos/800/450",
+        alt: "AuraFolio main library view showing organized PDF collection",
+    },
+    {
+        src: "https://picsum.photos/800/450",
+        alt: "AuraFolio sheet music viewer with navigation controls",
+    },
+];
+
+const bottomShots = [
+    {
+        src: "https://picsum.photos/400/600",
+        alt: "AuraFolio setlist management interface",
+    },
+    {
+        src: "https://picsum.photos/400/600",
+        alt: "AuraFolio PDF preview and organization tools",
+    },
+    {
+        src: "https://picsum.photos/400/600",
+        alt: "AuraFolio full-screen sheet music display",
+    },
+];
+---
+
+<section class="section" id="screenshots">
+    <div class="container">
+        <div class="text-center mb-12">
+            <h2>AuraFolio. Beautiful. Effortless.</h2>
+            <p class="text-muted mt-3 max-w-2xl mx-auto">
+                Get a closer look at AuraFolio's clean and intuitive interface.
+            </p>
+        </div>
+
+        <div class="screenshots-grid">
+            <!-- Top row: 2 horizontal screenshots -->
+            <div class="screenshots-row-top">
+                {
+                    topShots.map((s) => (
+                        <div class="hero-card screenshot-card">
+                            <picture>
+                                <img
+                                    src={s.src}
+                                    alt={s.alt}
+                                    loading="lazy"
+                                    width={800}
+                                    height={450}
+                                />
+                            </picture>
+                        </div>
+                    ))
+                }
+            </div>
+
+            <!-- Bottom row: 3 vertical screenshots -->
+            <div class="screenshots-row-bottom">
+                {
+                    bottomShots.map((s) => (
+                        <div class="hero-card screenshot-card">
+                            <picture>
+                                <img
+                                    src={s.src}
+                                    alt={s.alt}
+                                    loading="lazy"
+                                    width={400}
+                                    height={600}
+                                />
+                            </picture>
+                        </div>
+                    ))
+                }
+            </div>
+        </div>
+    </div>
+</section>
