@@ -38,16 +38,5 @@ import Footer from "../components/Footer.astro";
       <FAQ />
       <Footer />
     </div>
-
-    <script type="module">
-      import { initMotion } from "../scripts/motion-init.mjs";
-
-      // initialize motion on DOM ready
-      if (document.readyState === "loading") {
-        document.addEventListener("DOMContentLoaded", () => initMotion());
-      } else {
-        initMotion();
-      }
-    </script>
   </body>
 </html>
