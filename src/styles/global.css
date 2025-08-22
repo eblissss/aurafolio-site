@@ -96,6 +96,11 @@ ol {
   padding: 0px !important;
 }
 
+.top-container {
+  padding-left: var(--space-4) !important;
+  padding-right: var(--space-4) !important;
+}
+
 /* ==================== ENHANCED TYPOGRAPHY ==================== */
 h1,
 h2,
@@ -296,6 +301,31 @@ nav a:hover {
   nav a {
     font-size: var(--font-size-sm);
     padding: var(--space-1) var(--space-2);
+  }
+}
+
+/* Mobile-only: stack logo above nav actions */
+@media (max-width: 640px) {
+  .header-nav {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-4);
+    padding: 16px 0;
+  }
+
+  .header-nav .brand {
+    order: 1;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .header-nav .nav-actions {
+    order: 2;
+    margin-top: var(--space-3);
+    flex-wrap: wrap;
+    justify-content: center;
   }
 }
 
@@ -589,7 +619,6 @@ footer {
   border-radius: 28px;
   padding: 24px;
   box-shadow: 0 24px 50px rgba(15, 25, 40, 0.12);
-  min-height: 360px;
   position: relative;
   overflow: hidden;
   transition: all 0.4s ease;
@@ -622,6 +651,12 @@ footer {
   border-top: 1px solid rgba(15, 25, 40, 0.08);
   margin-left: auto;
   margin-right: auto;
+}
+
+@media (max-width: 768px) {
+  .footer {
+    flex-direction: column;
+  }
 }
 
 .pills {
@@ -1021,7 +1056,12 @@ footer {
     0 1px 3px rgba(15, 25, 40, 0.08),
     0 4px 16px rgba(15, 25, 40, 0.04);
   transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-  overflow: visible;
+}
+
+@media (max-width: 768px) {
+  .download-card {
+    width: 100%;
+  }
 }
 
 .download-card:hover {
@@ -1355,7 +1395,8 @@ footer {
 
 @media (max-width: 768px) {
   .download-grid {
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
     gap: 24px;
   }
 
@@ -1580,59 +1621,6 @@ footer {
 
   .wn-version-number {
     font-size: .95rem;
-  }
-}
-
-@media (max-width: 768px) {
-  .download-grid {
-    grid-template-columns: 1fr;
-    gap: 24px;
-  }
-
-  .download-title {
-    font-size: var(--font-size-3xl);
-  }
-
-  .download-subtitle {
-    font-size: var(--font-size-base);
-  }
-
-  .version-badge {
-    flex-direction: column;
-    gap: 4px;
-    text-align: center;
-  }
-
-  .card-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 16px;
-  }
-
-  .latest-badge {
-    align-self: flex-end;
-  }
-
-  .download-btn {
-    padding: 16px 20px;
-    font-size: 15px;
-  }
-
-  .quick-info {
-    grid-template-columns: 1fr;
-    gap: 8px;
-  }
-
-  .footer-content {
-    grid-template-columns: 1fr;
-    gap: 24px;
-    text-align: center;
-  }
-
-  .trust-indicators {
-    flex-direction: row;
-    justify-content: center;
-    flex-wrap: wrap;
   }
 }
 
