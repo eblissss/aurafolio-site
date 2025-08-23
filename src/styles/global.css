@@ -970,17 +970,6 @@ footer {
 
 /* ==================== DOWNLOAD SECTION STYLES ==================== */
 
-/* Enhanced header section */
-.download-title {
-  font-size: var(--font-size-4xl);
-  font-weight: var(--font-weight-bold);
-  margin-bottom: 12px !important;
-  background: linear-gradient(135deg, var(--text-primary), var(--accent-primary));
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
 .download-subtitle {
   font-size: var(--font-size-lg);
   color: var(--text-secondary);
@@ -1087,7 +1076,6 @@ footer {
 }
 
 .platform-logo {
-  height: 64px;
   width: 64px;
   margin-right: 16px;
   margin-top: -4px;
@@ -1301,107 +1289,11 @@ footer {
   color: #10b981;
 }
 
-.command-details {
-  border: 1px solid rgba(15, 25, 40, 0.08);
-  border-radius: 8px;
-  overflow: visible;
-  flex-shrink: 0;
-  display: inline-block;
-  vertical-align: middle;
-  margin-left: 8px;
-  position: relative;
-}
-
-.command-summary {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  padding: 10px 12px;
-  background: #f8fafc;
-  cursor: pointer;
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--text-secondary);
-  transition: all 0.25s ease;
-  list-style: none;
-  border: none;
-  white-space: nowrap;
-  position: relative;
-  padding-right: 28px;
-  /* space for the arrow */
-}
-
-.command-summary::-webkit-details-marker {
-  display: none;
-}
-
-.command-summary::after {
-  display: none;
-}
-
-.command-details[open] .command-summary::after {
-  transform: translateY(-50%) rotate(180deg);
-}
-
-.command-summary:hover {
-  background: #f1f5f9;
-  color: var(--text-primary);
-}
-
-.command-content {
-  /* hidden by default; absolute dropdown below button */
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  white-space: nowrap;
-  overflow-x: auto;
-  z-index: 10;
-  padding: 4px 0;
-}
-
-.command-content code {
-  display: block;
-  font-family: var(--font-family-mono);
-  font-size: 11px;
-  background: #f1f5f9;
-  padding: 12px;
-  color: var(--text-primary);
-  word-break: break-all;
-  margin: 0;
-}
-
-/* show inline command when details is opened; this will expand only the containing card */
-.command-details[open] .command-content {
-  display: block;
-}
-
-/* Toggle lucide icons instead of pseudo arrow */
-.command-details .toggle-icon.up {
-  display: none;
-}
-
-.command-details .toggle-icon.down {
-  display: inline;
-}
-
-.command-details[open] .toggle-icon.up {
-  display: inline;
-}
-
-.command-details[open] .toggle-icon.down {
-  display: none;
-}
-
 @media (max-width: 768px) {
   .download-grid {
     display: flex;
     flex-direction: column;
     gap: 24px;
-  }
-
-  .download-title {
-    font-size: var(--font-size-3xl);
   }
 
   .download-subtitle {
@@ -1431,10 +1323,6 @@ footer {
     flex-direction: column;
     align-items: stretch;
     gap: 8px;
-  }
-
-  .command-details {
-    align-self: flex-end;
   }
 }
 
