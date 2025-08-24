@@ -608,7 +608,7 @@ footer {
   border-radius: var(--radius-sm);
 }
 
-/* Hero component styles (moved from Hero.astro) */
+/* Hero component styles */
 .hero {
   position: relative;
 }
@@ -710,23 +710,6 @@ footer {
   .cta-title.stagger-3 {
     margin-left: 0;
   }
-}
-
-.faq-title {
-  font-size: var(--font-size-4xl);
-  font-weight: var(--font-weight-bold);
-  margin-bottom: 16px;
-  background: linear-gradient(135deg, var(--text-primary), var(--accent-primary));
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.faq-subtitle {
-  font-size: var(--font-size-lg);
-  color: var(--text-secondary);
-  margin: 0;
-  line-height: var(--line-height-relaxed);
 }
 
 .faq-container {
@@ -908,14 +891,6 @@ footer {
 
 /* Responsive Design for FAQ */
 @media (max-width: 768px) {
-  .faq-title {
-    font-size: var(--font-size-3xl);
-  }
-
-  .faq-subtitle {
-    font-size: var(--font-size-base);
-  }
-
   .faq-question {
     padding: 20px 24px;
   }
@@ -1036,25 +1011,10 @@ footer {
   margin: 0 auto;
 }
 
-.download-card {
-  background: linear-gradient(145deg, #ffffff, #f8fafc);
-  border: 1px solid rgba(15, 25, 40, 0.08);
-  border-radius: 24px;
-  padding: 28px;
-  box-shadow:
-    0 1px 3px rgba(15, 25, 40, 0.08),
-    0 4px 16px rgba(15, 25, 40, 0.04);
-  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
 @media (max-width: 768px) {
   .download-card {
     width: 100%;
   }
-}
-
-.download-card:hover {
-  box-shadow: 0 8px 20px rgba(15, 25, 40, 0.2);
 }
 
 .card-header {
@@ -1076,9 +1036,10 @@ footer {
 }
 
 .platform-logo {
-  width: 64px;
+  width: 64px !important;
   margin-right: 16px;
   margin-top: -4px;
+  border: none !important;
 }
 
 .platform-name {
@@ -1105,6 +1066,16 @@ footer {
   margin-bottom: 24px;
 }
 
+.unsigned-note {
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--text-secondary);
+  margin: 6px 0 10px;
+  background: var(--bg-secondary, #f3f6fa);
+  padding: 6px 10px;
+  border-radius: 6px;
+}
+
 .download-btn {
   width: 100%;
   display: flex;
@@ -1126,11 +1097,96 @@ footer {
   letter-spacing: 0.01em;
 }
 
+.download-btn.disabled {
+  pointer-events: none;
+  filter: grayscale(35%) brightness(0.85);
+  opacity: 0.6;
+  transform: none !important;
+  box-shadow: none !important;
+}
 
-/* remove sheen/ripple pseudo elements for a simpler hover */
-.download-btn::before,
-.download-btn::after {
+/* ==================== EULA CONSENT STYLES ==================== */
+.consent-box {
+  background: linear-gradient(180deg, #f6f9ff, #eef3ff) !important;
+}
+
+.eula-consent {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: var(--font-size-base);
+  line-height: 1.5;
+  color: var(--text-secondary);
+  font-weight: 500;
+  cursor: pointer;
+  position: relative;
+  user-select: none;
+}
+
+.eula-consent:focus-within .custom-box {
+  box-shadow: 0 0 0 4px rgba(43, 120, 255, 0.2);
+  border-color: var(--accent-primary);
+}
+
+.eula-checkbox {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.custom-box {
+  --size: 22px;
+  width: var(--size);
+  height: var(--size);
+  border: 2px solid rgba(15, 25, 40, 0.25);
+  border-radius: 8px;
+  background: linear-gradient(145deg, #ffffff, #f0f5ff);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: all .35s cubic-bezier(.16, .8, .32, 1);
+  box-shadow: inset 0 1px 2px rgba(15, 25, 40, 0.08), 0 2px 4px rgba(15, 25, 40, 0.04);
+}
+
+.custom-box::after {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-radius: 4px;
+  background: linear-gradient(135deg, var(--accent-primary), var(--primary-700));
+  transform: scale(0) rotate(-8deg);
+  transition: transform .35s cubic-bezier(.5, 1.6, .3, 1), box-shadow .35s;
+  box-shadow: 0 4px 10px -2px rgba(43, 120, 255, .5);
+}
+
+.eula-checkbox:checked+.custom-box {
+  border-color: var(--accent-primary);
+  background: linear-gradient(145deg, #f0f6ff, #ffffff);
+}
+
+.eula-checkbox:checked+.custom-box::after {
+  transform: scale(1) rotate(0deg);
+}
+
+.eula-checkbox:not(:checked)+.custom-box:hover {
+  border-color: rgba(43, 120, 255, 0.55);
+}
+
+.consent-text a.eula-link {
+  color: var(--accent-primary);
+  font-weight: 600;
+  position: relative;
+}
+
+.consent-text a.eula-link::after {
   display: none;
+}
+
+@media (max-width: 640px) {
+  .consent-box {
+    padding: 10px 14px;
+  }
 }
 
 .download-btn:hover {
@@ -1168,6 +1224,21 @@ footer {
   border: 1px solid rgba(15, 25, 40, 0.06);
   border-radius: 14px;
   padding: 16px;
+}
+
+/* Install note variant below system requirements */
+.install-note {
+  margin-top: 12px;
+  background: linear-gradient(135deg, #fff8f0, #fff4e5);
+  border-color: rgba(255, 157, 66, 0.35);
+}
+
+.install-note .req-label {
+  color: #b45309;
+}
+
+.install-note .req-text strong {
+  color: var(--text-primary);
 }
 
 .req-header {

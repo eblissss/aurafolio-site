@@ -2,7 +2,6 @@
 import type { SoftwareRelease, PreviousNote } from "../types/types";
 import { marked } from "marked";
 import releaseJson from "../../releases.json";
-import { BookOpen as BookOpenIcon } from "@lucide/astro";
 import site from "../config/site";
 const data = releaseJson as SoftwareRelease;
 
@@ -69,7 +68,6 @@ function formatDate(dateStr: string) {
     <div class="text-center mt-8">
       <div class="flex flex-wrap gap-4 justify-center items-center">
         <a href={`${site.repoUrl}/releases`} class="btn outline">
-          <BookOpenIcon size={16} class="mr-2" />
           View All Releases
         </a>
       </div>

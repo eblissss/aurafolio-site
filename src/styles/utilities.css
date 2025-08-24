@@ -304,6 +304,10 @@
     margin-right: var(--space-2);
 }
 
+.mb-0 {
+    margin-bottom: 0;
+}
+
 .space-y-3>*+* {
     margin-top: var(--space-3);
 }

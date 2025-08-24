@@ -11,7 +11,7 @@ button {
 
 /* ==================== MAIN BUTTON SYSTEM ==================== */
 
-/* Buttons: modern, accessible, and consistent system based on header btn-ghost theme */
+/* Buttons: modern, accessible, and consistent system */
 .btn {
     --btn-gap: 10px;
     --btn-padding-y: 12px;
@@ -62,6 +62,16 @@ button {
 
 .btn:focus-visible {
     box-shadow: 0 8px 25px rgba(43, 120, 255, 0.15), 0 0 0 4px rgba(43, 120, 255, 0.12);
+}
+
+/* Generic disabled state (used when EULA not accepted) */
+.btn.disabled,
+.btn[aria-disabled="true"] {
+    pointer-events: none;
+    opacity: 0.55;
+    filter: saturate(60%) brightness(0.9) contrast(0.95);
+    transform: none !important;
+    box-shadow: none !important;
 }
 
 /* ==================== BUTTON VARIANTS ==================== */

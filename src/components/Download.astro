@@ -27,13 +27,11 @@ function getSystemRequirements(platform: string) {
 
 <section class="section" id="download">
   <div class="container">
-    <!-- Enhanced header with better visual hierarchy -->
     <div class="text-center mb-16">
       <h2>Download AuraFolio</h2>
       <p class="download-subtitle">
         Choose your platform and start organizing your sheet music in seconds
       </p>
-
       <div class="release-info">
         <div class="version-display">
           <span class="version-number">{data.version}</span>
@@ -49,14 +47,32 @@ function getSystemRequirements(platform: string) {
           }
         </p>
       </div>
+
+      <div
+        class="release-info consent-box"
+        role="group"
+        aria-labelledby="eula-consent-label"
+      >
+        <label class="eula-consent" id="eula-consent-label">
+          <input type="checkbox" id="eulaConsent" class="eula-checkbox" />
+          <span class="custom-box" aria-hidden="true"></span>
+          <span class="consent-text"
+            >I agree to the <a
+              href="/eula"
+              target="_blank"
+              rel="noopener"
+              class="eula-link">End User License Agreement</a
+            ></span
+          >
+        </label>
+      </div>
     </div>
 
-    <!-- Enhanced download grid with better spacing -->
     <div class="download-grid">
       {
-        Object.entries(assets).map(([platform, asset], index) => (
+        Object.entries(assets).map(([platform, asset]) => (
           <div
-            class="download-card"
+            class="download-card hero-card"
             data-platform={platform.toLowerCase().replace(/[^a-z0-9]/g, "-")}
           >
             <div class="card-header">
@@ -67,7 +83,6 @@ function getSystemRequirements(platform: string) {
                   class="platform-logo"
                 />
               </div>
-
               <div class="platform-info">
                 <div class="platform-details">
                   <h3 class="platform-name">{platform}</h3>
@@ -77,21 +92,36 @@ function getSystemRequirements(platform: string) {
                 </div>
               </div>
             </div>
-
             <div class="download-section">
-              <a href={asset.url} class="btn download-btn">
+              <a
+                href={asset.url}
+                class="btn download-btn disabled"
+                aria-disabled="true"
+                tabindex="-1"
+                data-download-link
+              >
                 <DownloadIcon size={24} />
                 <span>Download for {platform.split(" ")[0]}</span>
               </a>
-
               <div class="system-req">
                 <div class="req-header">
                   <span class="req-label">System Requirements</span>
                 </div>
                 <span class="req-text">{getSystemRequirements(platform)}</span>
               </div>
+               {platform.toLowerCase().includes('windows') && (
+                 <div class="system-req install-note" role="note">
+                   <div class="req-header"><span class="req-label">First Launch (Unsigned)</span></div>
+                   <span class="req-text">If Windows SmartScreen appears: click <strong>More info</strong> then <strong>Run anyway</strong>. You can also right‑click the installer, choose <strong>Properties &gt; Unblock</strong> if needed.</span>
+                 </div>
+               )}
+               {platform.toLowerCase().includes('mac') && (
+                 <div class="system-req install-note" role="note">
+                   <div class="req-header"><span class="req-label">First Launch (Unsigned)</span></div>
+                   <span class="req-text">Right‑click (Control‑click) the app &gt; <strong>Open</strong> &gt; confirm. If Gatekeeper blocks it, go to <strong>System Settings → Privacy &amp; Security</strong> and press <strong>Open Anyway</strong>, then Open.</span>
+                 </div>
+               )}
             </div>
-
             <div class="security-section">
               <div class="checksum-section">
                 <label class="checksum-label">SHA256 Checksum:</label>
@@ -114,9 +144,6 @@ function getSystemRequirements(platform: string) {
         ))
       }
     </div>
-    <p class="text-muted mt-6 mx-auto text-center">
-      By downloading, you agree to the <a href="/eula" class="link">EULA</a>.
-    </p>
   </div>
 </section>
 
@@ -147,4 +174,41 @@ function getSystemRequirements(platform: string) {
       }
     });
   });
+
+  // EULA consent gating logic
+  const consentCheckbox = document.getElementById("eulaConsent");
+  const downloadBtns = document.querySelectorAll(".download-btn");
+  const consentBox = document.querySelector(".consent-box");
+
+  function updateDownloadState() {
+    const allowed = (consentCheckbox as HTMLInputElement | null)?.checked;
+    downloadBtns.forEach((btn) => {
+      if (!allowed) {
+        btn.setAttribute("aria-disabled", "true");
+        btn.classList.add("disabled");
+        btn.setAttribute("tabindex", "-1");
+      } else {
+        btn.removeAttribute("aria-disabled");
+        btn.classList.remove("disabled");
+        btn.removeAttribute("tabindex");
+      }
+    });
+  }
+
+  function indicateRequired() {
+    consentBox?.classList.add("shake");
+    setTimeout(() => consentBox?.classList.remove("shake"), 500);
+  }
+
+  downloadBtns.forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      if (btn.getAttribute("aria-disabled") === "true") {
+        e.preventDefault();
+        indicateRequired();
+      }
+    });
+  });
+
+  consentCheckbox?.addEventListener("change", updateDownloadState);
+  updateDownloadState();
 </script>
