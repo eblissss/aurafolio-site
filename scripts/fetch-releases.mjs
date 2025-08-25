@@ -45,30 +45,36 @@ function pickAssetSha256(asset) {
 }
 
 function matchPlatforms(assets) {
-  const map = {
-    windows_x64: {
+  const patterns = [
+    {
       label: 'Windows (x64)',
-      pattern: /^AuraFolio-Setup-v[\d.]+-windows-x64.exe$/
+      pattern: /^AuraFolio.*_x64.*\.msi$|^AuraFolio-Setup-v[\d.]+-windows-x64\.exe$/
     },
-    macos_arm64: {
+    {
       label: 'macOS (Apple Silicon)',
-      pattern: /^AuraFolio-v[\d.]+-macos-arm64.dmg$/
+      pattern: /^AuraFolio.*aarch64.*\.dmg$|^AuraFolio-v[\d.]+-macos-arm64\.dmg$/
     },
-    linux_x64: {
-      label: 'Linux (x64)',
-      pattern: /^AuraFolio-v[\d.]+-linux-x64.AppImage$/
+    {
+      label: 'Linux (AppImage x64)',
+      pattern: /^AuraFolio.*amd64.*\.AppImage$|^AuraFolio-v[\d.]+-linux-x64\.AppImage$/
+    },
+    {
+      label: 'Linux (DEB x64)',
+      pattern: /^AuraFolio.*amd64.*\.deb$/
+    },
+    {
+      label: 'Linux (RPM x64)',
+      pattern: /^AuraFolio.*x86_64.*\.rpm$/
     }
-  };
+  ];
 
   const result = {};
   for (const a of assets) {
-    for (const key of Object.keys(map)) {
-      const { label, pattern } = map[key];
+    for (const { label, pattern } of patterns) {
       if (pattern.test(a.name)) {
         const sha256 = pickAssetSha256(a) || '';
         const sizeMb = Math.max(0, (a.size || 0) / 1024 / 1024);
-        result[key] = {
-          label,
+        result[label] = {
           size_mb: Number(sizeMb.toFixed(1)),
           sha256,
           url: a.browser_download_url
@@ -83,7 +89,7 @@ function normalizeRelease(r) {
   return {
     version: r.tag_name,
     released: r.published_at,
-    notes_markdown: r.body || '',
+    notes: r.body || '',
     assets: matchPlatforms(r.assets || [])
   };
 }
@@ -104,12 +110,22 @@ async function main() {
   const latest = picked[0];
   const history = picked.slice(1);
 
-  const out = { latest, history };
+  // Transform to match expected output format
+  const out = {
+    version: latest.version,
+    released: latest.released,
+    assets: latest.assets,
+    notes: latest.notes,
+    prev_notes: history.map(h => ({
+      version: h.version,
+      released: h.released,
+      notes: h.notes
+    }))
+  };
 
-  const outDir = path.resolve('src/data');
-  fs.mkdirSync(outDir, { recursive: true });
-  fs.writeFileSync(path.join(outDir, 'releases.json'), JSON.stringify(out, null, 2));
-  console.log('Wrote src/data/releases.json');
+  // Write to file
+  fs.writeFileSync(path.resolve('releases.json'), JSON.stringify(out, null, 2));
+  console.log('Wrote releases.json');
 }
 
 main().catch(err => {
