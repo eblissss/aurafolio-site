@@ -1105,6 +1105,50 @@ footer {
   box-shadow: none !important;
 }
 
+/* Multi Linux variant buttons layout */
+.multi-downloads.one-row {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+}
+
+.download-btn.small {
+  padding: 14px 16px;
+  font-size: 15px;
+  text-transform: uppercase;
+}
+
+.checksum-matrix {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.checksum-row .variant-tag {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-right: 8px;
+  min-width: 52px;
+}
+
+.linux-size-line {
+  display: block;
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-bottom: 4px;
+}
+
+.linux-size-line small {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-left: 6px;
+}
+
 /* ==================== EULA CONSENT STYLES ==================== */
 .consent-box {
   background: linear-gradient(180deg, #f6f9ff, #eef3ff) !important;

@@ -2,7 +2,6 @@ export interface ReleaseAsset {
     size_mb: number;
     sha256: string;
     url: string;
-    filename: string;
 }
 
 export interface PreviousNote {

@@ -71,8 +71,7 @@ function matchPlatforms(assets) {
           label,
           size_mb: Number(sizeMb.toFixed(1)),
           sha256,
-          url: a.browser_download_url,
-          filename: a.name
+          url: a.browser_download_url
         };
       }
     }

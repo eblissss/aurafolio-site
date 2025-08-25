@@ -70,78 +70,231 @@ function getSystemRequirements(platform: string) {
 
     <div class="download-grid">
       {
-        Object.entries(assets).map(([platform, asset]) => (
-          <div
-            class="download-card hero-card"
-            data-platform={platform.toLowerCase().replace(/[^a-z0-9]/g, "-")}
-          >
-            <div class="card-header">
-              <div class="logo-wrap" aria-hidden="true">
-                <Image
-                  src={logoSquare}
-                  alt="AuraFolio logo"
-                  class="platform-logo"
-                />
-              </div>
-              <div class="platform-info">
-                <div class="platform-details">
-                  <h3 class="platform-name">{platform}</h3>
-                  <div class="platform-meta">
-                    <span class="file-size">{fmtMB(asset.size_mb)}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="download-section">
-              <a
-                href={asset.url}
-                class="btn download-btn disabled"
-                aria-disabled="true"
-                tabindex="-1"
-                data-download-link
+        (() => {
+          // Group Linux variants (AppImage, DEB, RPM) while JSON stays flat
+          const entries = Object.entries(assets);
+          const linuxVariants = entries.filter(([p]) =>
+            p.toLowerCase().startsWith("linux"),
+          );
+          const nonLinux = entries.filter(
+            ([p]) => !p.toLowerCase().startsWith("linux"),
+          );
+          const cards: any[] = [];
+          nonLinux.forEach(([platform, asset]) => {
+            cards.push(
+              <div
+                class="download-card hero-card"
+                data-platform={platform
+                  .toLowerCase()
+                  .replace(/[^a-z0-9]/g, "-")}
               >
-                <DownloadIcon size={24} />
-                <span>Download for {platform.split(" ")[0]}</span>
-              </a>
-              <div class="system-req">
-                <div class="req-header">
-                  <span class="req-label">System Requirements</span>
-                </div>
-                <span class="req-text">{getSystemRequirements(platform)}</span>
-              </div>
-               {platform.toLowerCase().includes('windows') && (
-                 <div class="system-req install-note" role="note">
-                   <div class="req-header"><span class="req-label">First Launch (Unsigned)</span></div>
-                   <span class="req-text">If Windows SmartScreen appears: click <strong>More info</strong> then <strong>Run anyway</strong>. You can also right‑click the installer, choose <strong>Properties &gt; Unblock</strong> if needed.</span>
-                 </div>
-               )}
-               {platform.toLowerCase().includes('mac') && (
-                 <div class="system-req install-note" role="note">
-                   <div class="req-header"><span class="req-label">First Launch (Unsigned)</span></div>
-                   <span class="req-text">Right‑click (Control‑click) the app &gt; <strong>Open</strong> &gt; confirm. If Gatekeeper blocks it, go to <strong>System Settings → Privacy &amp; Security</strong> and press <strong>Open Anyway</strong>, then Open.</span>
-                 </div>
-               )}
-            </div>
-            <div class="security-section">
-              <div class="checksum-section">
-                <label class="checksum-label">SHA256 Checksum:</label>
-                <div class="checksum-row">
-                  <div class="checksum-display">
-                    <code class="checksum-value">{asset.sha256}</code>
-                    <button
-                      class="copy-checksum-btn"
-                      data-clipboard={asset.sha256}
-                      title="Copy checksum to clipboard"
-                    >
-                      <ClipboardIcon size={16} class="copy-icon" />
-                      <CheckIcon size={16} class="check-icon hidden" />
-                    </button>
+                <div class="card-header">
+                  <div class="logo-wrap" aria-hidden="true">
+                    <Image
+                      src={logoSquare}
+                      alt="AuraFolio logo"
+                      class="platform-logo"
+                    />
+                  </div>
+                  <div class="platform-info">
+                    <div class="platform-details">
+                      <h3 class="platform-name">{platform}</h3>
+                      <div class="platform-meta">
+                        <span class="file-size">{fmtMB(asset.size_mb)}</span>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </div>
-          </div>
-        ))
+                <div class="download-section">
+                  <a
+                    href={asset.url}
+                    class="btn download-btn disabled"
+                    aria-disabled="true"
+                    tabindex="-1"
+                    data-download-link
+                  >
+                    <DownloadIcon size={24} />
+                    <span>Download for {platform.split(" ")[0]}</span>
+                  </a>
+                  <div class="system-req">
+                    <div class="req-header">
+                      <span class="req-label">System Requirements</span>
+                    </div>
+                    <span class="req-text">
+                      {getSystemRequirements(platform)}
+                    </span>
+                  </div>
+                  {platform.toLowerCase().includes("windows") && (
+                    <div class="system-req install-note" role="note">
+                      <div class="req-header">
+                        <span class="req-label">First Launch (Unsigned)</span>
+                      </div>
+                      <span class="req-text">
+                        If Windows SmartScreen appears: click{" "}
+                        <strong>More info</strong> then{" "}
+                        <strong>Run anyway</strong>. You can also right‑click
+                        the installer, choose{" "}
+                        <strong>Properties &gt; Unblock</strong> if needed.
+                      </span>
+                    </div>
+                  )}
+                  {platform.toLowerCase().includes("mac") && (
+                    <div class="system-req install-note" role="note">
+                      <div class="req-header">
+                        <span class="req-label">First Launch (Unsigned)</span>
+                      </div>
+                      <span class="req-text">
+                        Right‑click (Control‑click) the app &gt;{" "}
+                        <strong>Open</strong> &gt; confirm. If Gatekeeper blocks
+                        it, go to{" "}
+                        <strong>System Settings → Privacy & Security</strong>{" "}
+                        and press <strong>Open Anyway</strong>, then Open.
+                      </span>
+                    </div>
+                  )}
+                </div>
+                <div class="security-section">
+                  <div class="checksum-section">
+                    <label class="checksum-label">SHA256 Checksum:</label>
+                    <div class="checksum-row">
+                      <div class="checksum-display">
+                        <code class="checksum-value">{asset.sha256}</code>
+                        <button
+                          class="copy-checksum-btn"
+                          data-clipboard={asset.sha256}
+                          title="Copy checksum to clipboard"
+                        >
+                          <ClipboardIcon size={16} class="copy-icon" />
+                          <CheckIcon size={16} class="check-icon hidden" />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>,
+            );
+          });
+          if (linuxVariants.length) {
+            // Display single Linux card with three buttons
+            const primary = linuxVariants[0];
+            const appImageEntry = linuxVariants.find(([p]) =>
+              p.toLowerCase().includes("appimage"),
+            );
+            const debEntry = linuxVariants.find(([p]) =>
+              p.toLowerCase().includes("deb"),
+            );
+            const rpmEntry = linuxVariants.find(([p]) =>
+              p.toLowerCase().includes("rpm"),
+            );
+            cards.push(
+              <div class="download-card hero-card" data-platform="linux-x64">
+                <div class="card-header">
+                  <div class="logo-wrap" aria-hidden="true">
+                    <Image
+                      src={logoSquare}
+                      alt="AuraFolio logo"
+                      class="platform-logo"
+                    />
+                  </div>
+                  <div class="platform-info">
+                    <div class="platform-details">
+                      <h3 class="platform-name">Linux (x64)</h3>
+                      <div class="platform-meta">
+                        <span class="file-size">
+                          {appImageEntry && debEntry ? (
+                            <>
+                              <span class="linux-size-line">
+                                {fmtMB(appImageEntry[1].size_mb)}{" "}
+                                <small>(.AppImage)</small>
+                              </span>
+                              <span class="linux-size-line">
+                                {fmtMB(debEntry[1].size_mb)}{" "}
+                                <small>(.deb & .rpm)</small>
+                              </span>
+                            </>
+                          ) : (
+                            fmtMB(primary[1].size_mb)
+                          )}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="download-section">
+                  <div class="multi-downloads one-row">
+                    {linuxVariants.map(([plat, asset]) => {
+                      let label =
+                        plat.match(/\((.*?)\)/)?.[1]?.split(" ")[0] ||
+                        plat.split(" ")[1] ||
+                        "Download";
+                      if (label.toLowerCase().startsWith("appimage"))
+                        label = "App";
+                      return (
+                        <a
+                          href={asset.url}
+                          class="btn download-btn small disabled"
+                          aria-disabled="true"
+                          tabindex="-1"
+                          data-download-link
+                          data-variant={label.toLowerCase()}
+                        >
+                          <DownloadIcon size={20} />
+                          <span>{label}</span>
+                        </a>
+                      );
+                    })}
+                  </div>
+                  <div class="system-req">
+                    <div class="req-header">
+                      <span class="req-label">System Requirements</span>
+                    </div>
+                    <span class="req-text">
+                      {getSystemRequirements("Linux")}
+                    </span>
+                  </div>
+                </div>
+                <div class="security-section">
+                  <div class="checksum-section multi">
+                    <label class="checksum-label">SHA256 Checksums:</label>
+                    <div class="checksum-matrix">
+                      {linuxVariants.map(([plat, asset]) => {
+                        let label =
+                          plat.match(/\((.*?)\)/)?.[1]?.split(" ")[0] ||
+                          plat.split(" ")[1] ||
+                          "File";
+                        if (label.toLowerCase().startsWith("appimage"))
+                          label = "App";
+                        return (
+                          <div
+                            class="checksum-row"
+                            data-variant={label.toLowerCase()}
+                          >
+                            <span class="variant-tag">{label}</span>
+                            <div class="checksum-display">
+                              <code class="checksum-value">{asset.sha256}</code>
+                              <button
+                                class="copy-checksum-btn"
+                                data-clipboard={asset.sha256}
+                                title={`Copy ${label} checksum to clipboard`}
+                              >
+                                <ClipboardIcon size={16} class="copy-icon" />
+                                <CheckIcon
+                                  size={16}
+                                  class="check-icon hidden"
+                                />
+                              </button>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </div>
+              </div>,
+            );
+          }
+          return cards;
+        })()
       }
     </div>
   </div>
