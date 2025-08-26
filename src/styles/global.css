@@ -186,6 +186,12 @@ p {
   line-height: var(--line-height-relaxed);
 }
 
+@media (max-width: 768px) {
+  .subhead {
+    margin-right: 0;
+  }
+}
+
 .small {
   font-size: var(--font-size-sm);
   color: var(--text-muted);
@@ -611,6 +617,18 @@ footer {
 /* Hero component styles */
 .hero {
   position: relative;
+}
+
+.hero-flex {
+  display: flex;
+  gap: 0;
+}
+
+@media (max-width: 768px) {
+  .hero-flex {
+    flex-direction: column;
+    gap: 32px;
+  }
 }
 
 .hero-card {
