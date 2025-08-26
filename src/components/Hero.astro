@@ -1,11 +1,12 @@
 ---
 import { Download as DownloadIcon } from "@lucide/astro";
 import { Image } from "astro:assets";
+import CombinedImg from "../images/Combined.png";
 ---
 
 <section class="hero">
   <div class="container">
-    <div class="grid grid-2 items-center">
+    <div class="flex items-center gap-0">
       <div>
         <h1 class="leading-tight">Sheet music,</h1>
         <h2 class="leading-tight">intuitive and organized.</h2>
@@ -38,11 +39,9 @@ import { Image } from "astro:assets";
       <div>
         <div class="hero-card" aria-label="Product preview">
           <Image
-            src="https://picsum.photos/600/400"
+            src={CombinedImg}
             alt="The AuraFolio application displaying a PDF sheet music score"
             loading="eager"
-            width="600"
-            height="400"
             fetchpriority="high"
           />
         </div>

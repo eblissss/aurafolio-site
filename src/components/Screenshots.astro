@@ -1,29 +1,35 @@
 ---
 import { Image } from "astro:assets";
 
+import MainWide from "../images/MainWide.png";
+import SheetWide from "../images/SheetWide.png";
+import GridTall from "../images/GridTall.png";
+import ListTall from "../images/ListTall.png";
+import SetlistTall from "../images/SetlistTall.png";
+
 const topShots = [
     {
-        src: "https://picsum.photos/800/450",
-        alt: "AuraFolio main library view showing organized PDF collection",
+        src: SheetWide,
+        alt: "AuraFolio main library view",
     },
     {
-        src: "https://picsum.photos/800/450",
-        alt: "AuraFolio sheet music viewer with navigation controls",
+        src: MainWide,
+        alt: "AuraFolio sheet music viewer",
     },
 ];
 
 const bottomShots = [
     {
-        src: "https://picsum.photos/400/600",
-        alt: "AuraFolio setlist management interface",
+        src: GridTall,
+        alt: "AuraFolio grid view",
     },
     {
-        src: "https://picsum.photos/400/600",
-        alt: "AuraFolio PDF preview and organization tools",
+        src: ListTall,
+        alt: "AuraFolio list view",
     },
     {
-        src: "https://picsum.photos/400/600",
-        alt: "AuraFolio full-screen sheet music display",
+        src: SetlistTall,
+        alt: "AuraFolio setlist management",
     },
 ];
 ---
@@ -43,13 +49,7 @@ const bottomShots = [
                 {
                     topShots.map((s) => (
                         <div class="hero-card screenshot-card">
-                            <Image
-                                src={s.src}
-                                alt={s.alt}
-                                loading="lazy"
-                                width={800}
-                                height={450}
-                            />
+                            <Image src={s.src} alt={s.alt} loading="lazy" />
                         </div>
                     ))
                 }
@@ -60,13 +60,7 @@ const bottomShots = [
                 {
                     bottomShots.map((s) => (
                         <div class="hero-card screenshot-card">
-                            <Image
-                                src={s.src}
-                                alt={s.alt}
-                                loading="lazy"
-                                width={400}
-                                height={600}
-                            />
+                            <Image src={s.src} alt={s.alt} loading="lazy" />
                         </div>
                     ))
                 }
