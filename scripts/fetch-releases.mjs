@@ -72,7 +72,7 @@ function matchPlatforms(assets) {
   for (const a of assets) {
     for (const { label, pattern } of patterns) {
       if (pattern.test(a.name)) {
-        const sha256 = pickAssetSha256(a) || '';
+        const sha256 = (pickAssetSha256(a) || '').split('sha256:').pop();
         const sizeMb = Math.max(0, (a.size || 0) / 1024 / 1024);
         result[label] = {
           size_mb: Number(sizeMb.toFixed(1)),
