@@ -1,0 +1,25 @@
+name: Redeploy Cloudflare Pages on release
+
+on:
+  release:
+    types: [published, edited]
+  workflow_dispatch:
+
+jobs:
+  trigger:
+    name: Trigger Pages deploy hook
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Validate secret is present
+        run: |
+          if [ -z "${{ secrets.CF_PAGES_DEPLOY_HOOK }}" ]; then
+            echo "Missing CF_PAGES_DEPLOY_HOOK secret"; exit 1
+          fi
+
+      - name: Trigger Cloudflare Pages deploy hook
+        run: |
+          set -euo pipefail
+          curl -fsSL -X POST "${{ secrets.CF_PAGES_DEPLOY_HOOK }}"
+          echo "Deploy hook invoked."
